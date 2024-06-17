@@ -1,0 +1,10 @@
+
+train:  /Data/YLS/2nd_paper/DA/Unlabeled/SOMATOM/train
+val:  []
+nc:     7
+# Keypoints
+# kpt_shape: [20, 3]  # number of keypoints, number of dims (2 for x,y or 3 for x,y,visible)
+# flip_idx: [1, 2, 3, 4, 5]
+
+# Classes
+names: [ '0',  '1',  '2',  '3',  '4',  '5',  '6']
