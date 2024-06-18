@@ -23,6 +23,10 @@ The main modification is the loss function, located in Urtlalitic/Yolo/Uttils
 # t-SNE Visualization
 The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
 
+```
+python DA-YOLOV8/t-sne/plt_t-sne.py --Input_path image_dir --size 2 256
+```
+
 Input_path: All images are directly placed in this directory. Previous results used all images from those 4 datasets. 
 
 size: The size to resize the images. Since all images are square and have a size of 512, if size=512, it means visualizing the original images. If size=2, a large amount of data has been resized, but the results are better.
