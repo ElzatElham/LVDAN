@@ -81,7 +81,7 @@ x_min, x_max = np.min(data, 0), np.max(data, 0)
 embedding = (data - x_min) / (x_max - x_min)
 fig = plt.figure()
 
-colors = ['r', 'g',  'c'， 'b']
+colors = ['r', 'g', 'c', 'b']
 plt.figure(figsize=(10, 10))
 
 # 遍历每个数据点,根据标签绘制不同颜色的点
