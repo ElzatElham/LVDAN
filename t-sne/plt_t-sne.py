@@ -20,7 +20,7 @@ def parse_args():
         "--size",
         type=int,
         nargs="+",
-        default=[96],
+        default=[2,32,64,96,255],
         help="List of sizes for normalization",
     )
     return parser.parse_args()
@@ -37,37 +37,37 @@ def main(args):
     labels = ["iCT", "Optima", "Revolution", "SOMATOM"]
 
     for size in sizes:
-        data = np.zeros(
-            (len(Image_names), size * size)
-        )
-        label = np.zeros((len(Image_names),))
-
-        for i in tqdm.tqdm(range(len(Image_names))):
-            image_path = os.path.join(Input_path, Image_names[i])
-            basename = os.path.basename(image_path)
-
-            if "iCT" in basename:
-                label[i] = 0
-            elif "Revolution" in basename:
-                label[i] = 1
-            elif "Optima" in basename:
-                label[i] = 2
-            elif "SOMATOM" in basename:
-                label[i] = 3
-
-            img = cv2.imread(image_path)
-            img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-            img = cv2.resize(img_gray, (size, size))
-            img = img.reshape(1, size * size)
-            data[i] = img
-            
-        # save data and label to .tem file
-        
+        # save data and label to .tem file        
         name = f"./.tem/data_size_{size}.npy"
         if os.path.exists(name):
             data = np.load(name)
             label = np.load(f"./.tem/label_size_{size}.npy")
         else:
+            data = np.zeros((len(Image_names), size * size))
+            label = np.zeros((len(Image_names),))
+            
+            for i in tqdm.tqdm(range(len(Image_names))):
+                image_path = os.path.join(Input_path, Image_names[i])
+                basename = os.path.basename(image_path)
+
+                if "iCT" in basename:
+                    label[i] = 0
+                elif "Revolution" in basename:
+                    label[i] = 1
+                elif "Optima" in basename:
+                    label[i] = 2
+                elif "SOMATOM" in basename:
+                    label[i] = 3
+
+                img = cv2.imread(image_path)
+                img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+                img = cv2.resize(img_gray, (size, size))
+                # plt.imshow(img.reshape(size, size), cmap="gray")
+                # plt.show()
+                img = img.reshape(1, size * size)
+                data[i] = img
+            
+            
             np.save(f"./.tem/data_size_{size}.npy", data)
             np.save(f"./.tem/label_size_{size}.npy", label)
 
@@ -76,17 +76,17 @@ def main(args):
             data = PCA(n_components=100).fit_transform(data)
             
 
-        downsample = 5000
-        downsample_index = np.random.choice(
-            range(len(data)), downsample, replace=False
-        )
-        data = data[downsample_index]
-        label = label[downsample_index]
+        # downsample = 5000
+        # downsample_index = np.random.choice(
+        #     range(len(data)), downsample, replace=False
+        # )
+        # data = data[downsample_index]
+        # label = label[downsample_index]
 
         # drer = TSNE(
         #     n_components=2, init="pca", perplexity=30, random_state=0
         # )
-        drer = UMAP(n_components=2, random_state=0)
+        drer = UMAP(n_components=2, random_state=0, n_neighbors=200, min_dist=0.1, metric='euclidean')
         result_2D = drer.fit_transform(data)
 
         x_min, x_max = np.min(result_2D, 0), np.max(result_2D, 0)
