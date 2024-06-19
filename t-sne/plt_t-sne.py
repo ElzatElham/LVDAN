@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 import argparse
 import tqdm
-
+from sklearn.decomposition import PCA
+from umap import UMAP
 
 def parse_args():
     parser = argparse.ArgumentParser(description="t-SNE Visualization")
@@ -19,7 +20,7 @@ def parse_args():
         "--size",
         type=int,
         nargs="+",
-        default=[2, 256],
+        default=[96],
         help="List of sizes for normalization",
     )
     return parser.parse_args()
@@ -29,7 +30,7 @@ def main(args):
     Input_path = args.Input_path
     sizes = args.size
 
-    Image_names = os.listdir(Input_path)  # 获取目录下所有图片名称列表
+    Image_names = os.listdir(Input_path)
     print(len(Image_names))
 
     colors = ["r", "g", "c", "b"]
@@ -38,10 +39,9 @@ def main(args):
     for size in sizes:
         data = np.zeros(
             (len(Image_names), size * size)
-        )  # 初始化一个np.array数组用于存数据
-        label = np.zeros((len(Image_names),))  # 初始化一个np.array数组用于存标签
+        )
+        label = np.zeros((len(Image_names),))
 
-        # 读取并存储图片数据,原图为rgb三通道,而且大小不一,先灰度化,再resize成指定大小
         for i in tqdm.tqdm(range(len(Image_names))):
             image_path = os.path.join(Input_path, Image_names[i])
             basename = os.path.basename(image_path)
@@ -60,31 +60,47 @@ def main(args):
             img = cv2.resize(img_gray, (size, size))
             img = img.reshape(1, size * size)
             data[i] = img
+            
+        # save data and label to .tem file
+        
+        name = f"./.tem/data_size_{size}.npy"
+        if os.path.exists(name):
+            data = np.load(name)
+            label = np.load(f"./.tem/label_size_{size}.npy")
+        else:
+            np.save(f"./.tem/data_size_{size}.npy", data)
+            np.save(f"./.tem/label_size_{size}.npy", label)
 
-        tsne_2D = TSNE(
-            n_components=2, init="pca", perplexity=2, random_state=0
-        )  # 调用TSNE
-        result_2D = tsne_2D.fit_transform(data)
+        if data.shape[1] > 100:
+            # pca decomposition
+            data = PCA(n_components=100).fit_transform(data)
+            
+
+        downsample = 5000
+        downsample_index = np.random.choice(
+            range(len(data)), downsample, replace=False
+        )
+        data = data[downsample_index]
+        label = label[downsample_index]
+
+        # drer = TSNE(
+        #     n_components=2, init="pca", perplexity=30, random_state=0
+        # )
+        drer = UMAP(n_components=2, random_state=0)
+        result_2D = drer.fit_transform(data)
 
         x_min, x_max = np.min(result_2D, 0), np.max(result_2D, 0)
         embedding = (result_2D - x_min) / (x_max - x_min)
 
         plt.figure(figsize=(10, 10))
 
-        # 遍历每个数据点,根据标签绘制不同颜色的点
-        for i in range(embedding.shape[0]):
-            plt.scatter(
-                embedding[i, 0],
-                embedding[i, 1],
-                c=colors[int(label[i])],
-                s=80,
-                marker=".",
-            )
-
-        legend_elements = [
-            plt.Line2D([0], [0], color=c, marker=".", linestyle="") for c in colors
-        ]
-        plt.legend(legend_elements, labels, loc="upper right")
+        plt.scatter(
+            embedding[:, 0],
+            embedding[:, 1],
+            c=label,
+            s=80,
+            marker=".",
+        )
 
         plt.xticks([])
         plt.yticks([])
