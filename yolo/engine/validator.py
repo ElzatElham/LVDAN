@@ -156,22 +156,10 @@ class BaseValidator:
         self.init_metrics(de_parallel(model))
         self.jdict = []  # empty before each val
 
-        merged_array = []
-        labels       = []
-
         for batch_i, batch in enumerate(bar):
-            # print(batch['im_file'])
-            for iy in range(len(batch['im_file'])):
-                addr = batch['im_file'][iy]
-                filename = os.path.basename(addr)
-                if 'SOMATOM' in filename:
-                    labels.append(0)
-                elif 'iCT' in filename:
-                    labels.append(1)
 
 
-            self.run_callbacks('on_val_batch_start')
-            self.batch_i = batch_i
+
             # Preprocess
             with dt[0]:
                 batch = self.preprocess(batch)
@@ -181,27 +169,13 @@ class BaseValidator:
                 preds = model(batch['img'], augment=self.args.augment)
             
             
-            for ix in range(len(preds[0])):
-                X = preds[0][ix].reshape(1, preds[0][0].shape[0] * preds[0][0].shape[1])
-                X_cpu = X.cpu()
-                if len(merged_array) == 0:
-                    merged_array = X_cpu
-                else:
-                    merged_array = np.concatenate((merged_array, X_cpu), axis=0)
+
 
 
             
 
 
-            # Loss
-            # with dt[2]:
-            #     if self.training:
-            #         predsx = preds[:3]
 
-            #         print(f"predsx shape: {predsx.shape}")
-            #         print(f"batch shape: {batch.shape}")
-
-            #         self.loss += model.loss(batch, predsx)[1]
 
             # Postprocess
             with dt[3]:
@@ -214,36 +188,11 @@ class BaseValidator:
 
             self.run_callbacks('on_val_batch_end')
         
-        print(merged_array.shape)
-        labels = np.array(labels)
-
-        print(labels)
 
 
 
-        for  ix2 in range(100):
-            file_name = 't-SNE_plot_{}.pdf'.format(ix2)
-            tsne = TSNE(n_components=2, init='pca', random_state=0,perplexity=ix2+2,learning_rate = 1000)
-            X_embedded = tsne.fit_transform(merged_array)
 
-            # 随机生成标签
-            # labels = np.random.randint(0, 1, size=merged_array.shape[0])
-
-            # 创建散点图并根据标签上色
-            plt.figure(figsize=(10, 10))
-            plt.scatter(X_embedded[:, 0], X_embedded[:, 1], c=labels, cmap='viridis')
-            # 去除x轴和y轴的坐标
-            plt.xticks([])
-            plt.yticks([])
-            plt.title('t-SNE')
-            plt.savefig(os.path.join('/home/Jet/2nd_paper/figx3',file_name))
-
-
-            
-        # print(preds[0].shape)
-        # print(preds[1].shape)
-        # print(preds[2].shape)
-
+        
         stats = self.get_stats()
         self.check_stats(stats)
         self.speed = dict(zip(self.speed.keys(), (x.t / len(self.dataloader.dataset) * 1E3 for x in dt)))
