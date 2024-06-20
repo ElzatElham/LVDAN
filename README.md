@@ -22,13 +22,12 @@ pip install -r requirements.txt
 # Install ultralytics
 python setup.py install
 
-注意：You can directly modify the relevant code in ultralytics to implement other functionalities, such as adding attention mechanisms or changing the backbone. However, after making the modifications, you need to run `python setup.py install` again to apply the code changes.
-
 
 ```
 
 The main modification is the loss function, located in ultralytics/yolo/utils/loss.py
 
+**Note：**You can directly modify the relevant code in ultralytics to implement other functionalities, such as adding attention mechanisms or changing the backbone. However, after making the modifications, you need to run `python setup.py install` again to apply the code changes.
 
 # t-SNE Visualization
 The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
