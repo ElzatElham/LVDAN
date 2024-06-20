@@ -6,25 +6,35 @@ This is the official PyTorch implementation of our paper:
 
 # Installation
 
+Clone repo and install requirements.txt(https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
 
 
-Pip install the [YOLOv8](https://github.com/ultralytics/ultralytics) package including all requirements in a Python>=3.8 environment with PyTorch>=1.8.
 ```
 # Create a virtual environment
-conda create -n da-yolov8 python=3.8
-# Install YOLOv8
-pip install ultralytics
-# Replace the content in /root/anaconda3/envs/da-yolov8/lib/python3.8/site-packages/ultralytics with the code from master.
+conda create -n da-yolo python=3.7
+
+# Enter the DA-YOLO directory
+cd DA-YOLOV8-main
+
+# install requirement
+pip install -r requirements.txt
+
+# Install ultralytics
+python setup.py install
+
+注意：You can directly modify the relevant code in ultralytics to implement other functionalities, such as adding attention mechanisms or changing the backbone. However, after making the modifications, you need to run `python setup.py install` again to apply the code changes.
+
+
 ```
 
-The main modification is the loss function, located in Urtlalitic/Yolo/Uttils
+The main modification is the loss function, located in ultralytics/yolo/utils/loss.py
 
 
 # t-SNE Visualization
 The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
 
 ```
-python DA-YOLOV8/t-sne/plt_t-sne.py --Input_path image_dir --size 2 256
+python DA-YOLOV8/t-sne/plt_t-sne.py --Input_path image_dir --size 2 512
 ```
 
 --Input_path: All images are directly placed in this directory. Previous results used all images from those 4 datasets. 
