@@ -6,7 +6,7 @@ This is the official PyTorch implementation of our paper:
 
 # Installation
 
-Clone repo and install requirements.txt(https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
+Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
 
 
 ```
