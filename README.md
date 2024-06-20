@@ -10,6 +10,7 @@ Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV
 
 
 ```
+
 # Create a virtual environment
 conda create -n da-yolo python=3.7
 
@@ -21,7 +22,6 @@ pip install -r requirements.txt
 
 # Install ultralytics
 python setup.py install
-
 
 ```
 
