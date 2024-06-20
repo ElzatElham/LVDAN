@@ -29,7 +29,7 @@ python setup.py install
 
 The main modification is the loss function, located in ultralytics/yolo/utils/loss.py
 
-**Note：** You can directly modify the relevant code in [ultralytics](https://github.com/ElzatElham/DA-YOLOV8/tree/main/ultralytics) to implement other functionalities, such as adding attention mechanisms or changing the backbone. However, after making the modifications, you need to run `python setup.py install` again to apply the code changes.
+**Note：** You can directly modify the relevant code in 'yolov8-main/build/lib/ultralytics' to implement other functionalities, such as adding attention mechanisms or changing the backbone. However, after making the modifications, you need to run `python setup.py install` again to apply the code changes.
 
 # t-SNE Visualization
 The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
