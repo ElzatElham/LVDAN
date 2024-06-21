@@ -16,6 +16,8 @@ git clone https://github.com/ElzatElham/DA-YOLOV8.git  # clone
 # Create a virtual environment
 conda create -n da-yolo python=3.7
 
+conda activate da-yolo
+
 # Enter the DA-YOLO directory
 cd DA-YOLOV8-main
 
