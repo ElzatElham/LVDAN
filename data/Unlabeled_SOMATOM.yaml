@@ -1,5 +1,5 @@
 
-train:  /Data/YLS/2nd_paper/DA/Unlabeled/SOMATOM/train
+train:  /Volumes/ZelinDisk/big/YJT_DA/SOMATOM/train
 val:  []
 nc:     7
 # Keypoints

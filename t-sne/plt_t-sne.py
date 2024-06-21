@@ -9,6 +9,7 @@ from sklearn.decomposition import PCA
 from umap import UMAP
 
 def parse_args():
+    
     parser = argparse.ArgumentParser(description="t-SNE Visualization")
     parser.add_argument(
         "--Input_path",
@@ -23,6 +24,7 @@ def parse_args():
         default=[2,32,64,96,255],
         help="List of sizes for normalization",
     )
+    
     return parser.parse_args()
 
 
@@ -107,7 +109,7 @@ def main(args):
         plt.title(f"t-SNE Visualization (size={size})")
         plt.tight_layout()
 
-        plt.savefig(f"t_sne_OD_size_{size}.png", dpi=200)  # 保存图像到当前路径
+        plt.savefig(f"output/t_sne_OD_size_{size}.png", dpi=200)  # 保存图像到当前路径
         plt.close()  # 关闭图像,节省内存
 
 

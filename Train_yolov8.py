@@ -8,11 +8,11 @@ import numpy as np
 
 
 ## Train the model
-detection_model_path = '/Data/YLS/2nd_paper_model/yolov8/runs/detect/Revolution_best.pt'
+detection_model_path = '/Volumes/ZelinDisk/big/YJT_DA/model/Revolution_best.pt'
 detection_model = YOLO(detection_model_path)  # build a new model from YAML
 results      = detection_model.train(
-    data     = '/home/Jet/ultralytics-main/2nd_paper/data_yaml/Revolution2iCT.yaml',
-    datat    = '/home/Jet/ultralytics-main/2nd_paper/data_yaml/Unlabeled_iCT.yaml',
+    data     = './data/iCT2SOMATOM.yaml',
+    datat    = './data/Unlabeled_SOMATOM.yaml',
     da       = 0.00006,
     iou      = 0.5,
     conf     = 0.1, 
@@ -23,5 +23,5 @@ results      = detection_model.train(
     fliplr   = 0,
     flipud   = 0,
     name     = '04.25.1.Revolution2iCT_0.00006', 
-    device   = '0,1,2,3')
+    device   = 'cpu')
 

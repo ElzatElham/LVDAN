@@ -1,6 +1,6 @@
 
-train:  /Data/YLS/2nd_paper/02.25.1.iCT_Det/train
-val:    /Data/YLS/2nd_paper/02.25.1.SOMATOM_Det/val
+train:  /Volumes/ZelinDisk/big/YJT_DA/iCT/train
+val:    /Volumes/ZelinDisk/big/YJT_DA/SOMATOM/val
 nc:     7
 # Keypoints
 # kpt_shape: [20, 3]  # number of keypoints, number of dims (2 for x,y or 3 for x,y,visible)

@@ -2,3 +2,8 @@ t_sne_OD_size_2.png
 t_sne_OD_size_96.png
 .tem/
 __pycache__/
+build/*
+runs/*
+dist/*
+output/*
+ultralytics.egg-info/*

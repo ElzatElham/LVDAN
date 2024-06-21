@@ -1,12 +1,7 @@
-CONTRIBUTING.md
-LICENSE
-MANIFEST.in
 README.md
-README.zh-CN.md
 requirements.txt
 setup.cfg
 setup.py
-ultralytics/Train_yolov8.py
 ultralytics/__init__.py
 ultralytics.egg-info/PKG-INFO
 ultralytics.egg-info/SOURCES.txt
@@ -14,8 +9,6 @@ ultralytics.egg-info/dependency_links.txt
 ultralytics.egg-info/entry_points.txt
 ultralytics.egg-info/requires.txt
 ultralytics.egg-info/top_level.txt
-ultralytics/data/Unlabeled_SOMATOM.yaml
-ultralytics/data/iCT2SOMATOM.yaml
 ultralytics/datasets/Argoverse.yaml
 ultralytics/datasets/GlobalWheat2020.yaml
 ultralytics/datasets/ImageNet.yaml
