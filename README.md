@@ -1,7 +1,7 @@
 # DA-YOLOV8
 This is the official PyTorch implementation of our paper: 
 
-**DA-YOLOv8**
+**Unsupervised Domain Adaptation of Object Detection in Axial CT Images of Lumbar Vertebrae**
 
 
 # Installation
