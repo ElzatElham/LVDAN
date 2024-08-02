@@ -8,6 +8,7 @@ This is the official PyTorch implementation of our paper:
 
 
 Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
+The pretrained model urls of Object Detection([YOLOv8x](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x.pt)), 
 
 ```
 
