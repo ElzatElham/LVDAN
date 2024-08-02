@@ -1,4 +1,4 @@
-# DA-YOLOV8
+#  LVDAN
 This is the official PyTorch implementation of our paper: 
 
 **Unsupervised Domain Adaptation of Object Detection in Axial CT Images of Lumbar Vertebrae**
