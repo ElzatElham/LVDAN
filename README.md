@@ -10,22 +10,17 @@ This is the official PyTorch implementation of our paper:
 Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
 
 ```
-# git clone
-git clone https://github.com/ElzatElham/DA-YOLOV8.git  # clone
 
 # Create a virtual environment
-conda create -n da-yolo python=3.7
+conda create -n yolo python=3.7
 
-conda activate LVDAN
+conda activate yolo
 
-# Enter the LVDAN directory
-cd LVDAN-main
 
-# install requirement
-pip install -r requirements.txt
+
 
 # Install ultralytics
-python setup.py install
+pip install ultralytics
 
 ```
 
@@ -51,7 +46,7 @@ cd LVDAN-main
 # install requirement
 pip install -r requirements.txt
 
-# Install ultralytics
+# Install LVDAN
 python setup.py install
 
 ```
