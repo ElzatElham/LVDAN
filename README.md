@@ -16,9 +16,6 @@ conda create -n yolo python=3.7
 
 conda activate yolo
 
-
-
-
 # Install ultralytics
 pip install ultralytics
 
