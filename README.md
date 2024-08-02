@@ -4,11 +4,12 @@ This is the official PyTorch implementation of our paper:
 **Unsupervised Domain Adaptation of Object Detection in Axial CT Images of Lumbar Vertebrae**
 
 
-# Installation
+##  Installation
+
 
 Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
 
-
+# LVDAN
 ```
 # git clone
 git clone https://github.com/ElzatElham/DA-YOLOV8.git  # clone
