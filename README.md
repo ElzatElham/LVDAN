@@ -34,7 +34,7 @@ Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV
 git clone https://github.com/ElzatElham/DA-YOLOV8.git  # clone
 
 # Create a virtual environment
-conda create -n da-yolo python=3.7
+conda create -n LVDAN python=3.7
 
 conda activate LVDAN
 
