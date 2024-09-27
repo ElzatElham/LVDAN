@@ -59,35 +59,31 @@ class TargetSampleDiscriminabilityModule(nn.Module):
         # dist.all_reduce(num_features_tensor, op=dist.ReduceOp.MIN)  
         min_num_features = num_features_tensor.item()  
 
-        # 调整 k 值  
-        k = min(self.k, min_num_features - 1)  # 确保至少有一个其他样本  
+
+        k = min(self.k, min_num_features - 1) 
 
         if k < 1:  
-            # 处理极端情况  
+ 
             return torch.zeros(num_features, device=features.device)  
 
-        # 计算距离  
+
         distances = torch.cdist(features, features)  
 
-        # 计算 top-k 距离  
+
         topk_distances, _ = torch.topk(distances, k=k+1, largest=False)  # +1 because the first one is always 0 (self-distance)  
         inc_compactness = topk_distances[:, 1:].mean(dim=1)  
 
-        # 计算平均距离  
+
         inc_separability = distances.sum(dim=1) / (num_features - 1)  # 除以 n-1 因为不包括自身  
 
-        # 将密度和不确定性拼接  
+
         combined = torch.stack([inc_compactness, inc_separability], dim=1)  
 
-        # 通过全连接层  
+
         discriminability = self.fc(combined)  
         return torch.abs(discriminability).squeeze()  
 
-    # @staticmethod  
-    # def sync_tensor(tensor):  
-    #     rt = tensor.clone()  
-    #     dist.all_reduce(rt, op=dist.ReduceOp.MIN)  
-    #     return rt
+
 
 
 class GlobalDomainDifferenceModule(nn.Module):   
@@ -96,14 +92,13 @@ class GlobalDomainDifferenceModule(nn.Module):
         self.fc = nn.Linear(feature_dim, 1)  
 
     def forward(self, source_features, target_features):  
-        # 获取每个域的特征均值  
+
         source_mean = source_features.mean(dim=0)  
         target_mean = target_features.mean(dim=0)  
 
-        # 计算均值之间的距离(直接作为向量)  
+  
         feature_diff = source_mean - target_mean  
 
-        # 使用全连接层进一步处理特征  
         transferability = self.fc(feature_diff.view(1, -1))  
 
         return torch.abs(transferability).squeeze()
@@ -380,14 +375,14 @@ class v8DetectionLoss:
             vs = daerror[:n_batch]
             vt = daerror[n_batch:]
 
-            feature_dim = daerror.size()[1]  # 特征维度  
+            feature_dim = daerror.size()[1]  
 
-            k = min(5, n_batch - 1)  # k 不能大于源域样本数减 1
+            k = min(5, n_batch - 1)  
 
             if self.TG_loss is None:  
                 self.TG_loss = TGLoss(feature_dim, k).to(self.device)  
 
-            # 计算 DATE 损失  
+
             gda_loss, tsd_loss = self.TG_loss(vs, vt)
 
 
@@ -396,7 +391,7 @@ class v8DetectionLoss:
             vs_repeat = vs.unsqueeze(1).repeat(1, tn - n_batch, 1)
             vt_repeat = vt.unsqueeze(0).repeat(n_batch, 1, 1)
             pairwise_distances = torch.norm(vs_repeat - vt_repeat, p=2, dim=2)
-            # 对于 vt 中的每个样本,找到其到 vs 中所有样本的最短距离
+
             min_distances, _ = torch.min(pairwise_distances, dim=0)
 
             lda_loss = torch.sum(min_distances) / (tn - n_batch)
@@ -404,7 +399,7 @@ class v8DetectionLoss:
 
 
 
-            # 组合所有损失  
+
             loss[3] = lda_loss*self.hyp.LLDA + gda_loss*self.hyp.LGDA + tsd_loss*self.hyp.LTSD
 
 
