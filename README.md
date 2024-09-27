@@ -49,6 +49,17 @@ python setup.py install
 
 ```
 
+# Training and testing
+
+```
+# Training
+python Training.py
+
+# Testing
+python Testing.py
+
+```
+
 # t-SNE Visualization
 The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
 
