@@ -1,77 +1,82 @@
-#  LVDAN
-This is the official PyTorch implementation of our paper: 
+# LVDAN: Unsupervised Domain Adaptation for Object Detection in Axial CT Images
+
+Welcome to the official PyTorch implementation of our groundbreaking research paper: 
 
 **Unsupervised Domain Adaptation of Object Detection in Axial CT Images of Lumbar Vertebrae**
 
+## Overview
+
+LVDAN leverages advanced unsupervised domain adaptation techniques to enhance object detection performance in axial CT images of lumbar vertebrae. This model is designed to improve accuracy and robustness in medical imaging applications, addressing the challenges posed by domain shifts in data.
+
+### Key Advantages:
+- **High Accuracy**: Achieve superior detection rates in challenging medical imaging scenarios.
+- **Robustness**: Effectively adapts to variations in image quality and acquisition conditions.
+- **User-Friendly**: Simplified installation and training processes for seamless integration into your workflow.
 
 ## Pre-training Installation
 
+To get started, clone the repository and install the required dependencies in a Python environment (version >= 3.7) with PyTorch (version >= 1.13.1).
 
-Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
-The pretrained model urls of Object Detection([YOLOv8x](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x.pt)), 
+### Steps:
 
-```
+1. Create and activate a virtual environment:
+   ```bash
+   conda create -n yolo python=3.7
+   conda activate yolo
+   ```
 
-# Create a virtual environment
-conda create -n yolo python=3.7
+3. Install the required packages:
+   ```bash
+   pip install ultralytics
+   ```
 
-conda activate yolo
-
-# Install ultralytics
-pip install ultralytics
-
-```
-
-
+4. Download the pretrained YOLOv8x model:
+   - [YOLOv8x Pretrained Model](https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x.pt)
 
 ## DA-training Installation
 
+Follow these steps to set up the DA-training environment:
 
-Clone repo and install [requirements.txt](https://github.com/ElzatElham/DA-YOLOV8/blob/main/requirements.txt) in a Python>=3.7 environment, including PyTorch>=1.13.1.
+### Steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ElzatElham/LVDAN.git
+   ```
 
-```
-# git clone
-git clone https://github.com/ElzatElham/DA-YOLOV8.git  # clone
+2. Create and activate a new virtual environment:
+   ```bash
+   conda create -n LVDAN python=3.7
+   conda activate LVDAN
+   ```
 
-# Create a virtual environment
-conda create -n LVDAN python=3.7
+3. Install the required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-conda activate LVDAN
+4. Install LVDAN:
+   ```bash
+   python setup.py install
+   ```
 
-# Enter the LVDAN directory
-cd LVDAN-main
+## Training and Testing
 
-# install requirement
-pip install -r requirements.txt
+To train and test the model, use the following commands:
 
-# Install LVDAN
-python setup.py install
-
-```
-
-# Training and testing
-
-```
-# Training
+### Training:
+```bash
 python Training.py
+```
 
-# Testing
+### Testing:
+```bash
 python Testing.py
-
 ```
 
-# t-SNE Visualization
-The visualization code is located at: DA-YOLOV8/t-sne/plt_t-sne.py 
+All training and testing parameters can be found within `Training.py` and `Testing.py`. 
 
+Additionally, the dataset used in the paper is open-sourced and can be accessed here: [LDH-DL-MODEL Dataset](https://github.com/ElzatElham/LDH-DL-MODEL).
 
+---
 
-```
-python DA-YOLOV8/t-sne/plt_t-sne.py --Input_path image_dir --size 256
-```
-
---Input_path: All images are directly placed in this directory. 
-
---size: The size to resize the images. Since all images are square and have a size of 512, if size=512, it means visualizing the original images. If size=2, a large amount of data has been resized, but the results are better. If you want to plot multiple images with different resizes simultaneously, fill in multiple target size numbers separated by spaces.
-
-
-
+By following these instructions, you can effectively utilize the LVDAN model for enhanced object detection in axial CT images, paving the way for improved diagnostic capabilities in medical imaging.
