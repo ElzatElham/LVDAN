@@ -53,7 +53,7 @@ python setup.py install
 
 ```
 # Training
-python Train_yolov8.py
+python Training.py
 
 # Testing
 python Testing.py
