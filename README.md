@@ -1,4 +1,4 @@
-# LVDAN: Unsupervised Domain Adaptation for Object Detection in Axial CT Images
+# LVDAN: Lumbar Vertebrae Detection and Adaptive Network
 
 Welcome to the official PyTorch implementation of our groundbreaking research paper: 
 
