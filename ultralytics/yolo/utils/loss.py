@@ -38,7 +38,7 @@ class TGLoss(nn.Module):
 
     def compute_date_loss(self, discriminability, GFDD):  
         disc_loss = torch.mean(discriminability) 
-        loss_GDD = torch.mean(GFDD)  
+        loss_GDD = GFDD  
 
         
 
@@ -50,10 +50,10 @@ class TargetSampleDiscriminabilityModule(nn.Module):
     def __init__(self, feature_dim, k):  
         super(TargetSampleDiscriminabilityModule, self).__init__()  
         self.k = k  
-        self.fc = nn.Linear(2, 1)  # 输入维度为2  
+        self.fc = nn.Linear(2, 1)   
 
     def forward(self, features):  
-        # 同步特征数量  
+
         num_features = features.size(0)  
         num_features_tensor = torch.tensor([num_features], device=features.device)  
         # dist.all_reduce(num_features_tensor, op=dist.ReduceOp.MIN)  
@@ -74,7 +74,7 @@ class TargetSampleDiscriminabilityModule(nn.Module):
         inc_compactness = topk_distances[:, 1:].mean(dim=1)  
 
 
-        inc_separability = distances.sum(dim=1) / (num_features - 1)  # 除以 n-1 因为不包括自身  
+        inc_separability = distances.sum(dim=1) / (num_features - 1) 
 
 
         combined = torch.stack([inc_compactness, inc_separability], dim=1)  
